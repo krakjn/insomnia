@@ -14,6 +14,7 @@ build_job:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker pull $CI_REGISTRY/ballast-dev/insomnia:latest
     - docker run -e CGO_ENABLED=0 $CI_REGISTRY/ballast-dev/insomnia:latest
+    - go build insomnia.go
   artifacts:
     paths:
       - insomnia
