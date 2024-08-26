@@ -7,6 +7,7 @@ build_job:
   image: $CI_REGISTRY/ballast-dev/insomnia:latest
   script:
     - go build insomnia.go
+    - chmod +x insomnia
   artifacts:
     paths:
       - insomnia
