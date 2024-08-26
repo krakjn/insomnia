@@ -1,0 +1,36 @@
+stages:
+  - build
+  - release
+
+build_job:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    CGO_ENABLED: 0  # Disable CGO in the pipeline environment
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker pull $CI_REGISTRY/ballast-dev/insomnia:latest
+    - docker run -e CGO_ENABLED=0 $CI_REGISTRY/ballast-dev/insomnia:latest
+  artifacts:
+    paths:
+      - insomnia
+    expire_in: 1 week
+  only:
+    - main
+
+      #release_job:
+      #  stage: release
+      #  script:
+      #    - echo "Releasing insomnia"
+      #  dependencies:
+      #    - build_job
+      #  only:
+      #    - main
+      #  release:
+      #    name: "Release v1.0"
+      #    tag_name: "v1.0"
+      #    description: "Release description here"
+
