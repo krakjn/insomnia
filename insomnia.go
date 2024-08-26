@@ -16,7 +16,6 @@ func main() {
 		return
 	}
 
-	// Get a proxy object
 	obj := conn.Object("org.freedesktop.login1", dbus.ObjectPath("/org/freedesktop/login1"))
 
 	what := "sleep"
@@ -24,7 +23,6 @@ func main() {
 	why := "Preventing system sleep for operational reasons"
 	mode := "block" // Mode can be 'block' or 'delay'
 
-	// Call the Inhibit method
 	var fd dbus.UnixFD
 	err = obj.Call("org.freedesktop.login1.Manager.Inhibit", 0, what, who, why, mode).Store(&fd)
 	if err != nil {
