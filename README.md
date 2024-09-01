@@ -1,4 +1,11 @@
 # Insomnia
-Inspired from `caffienate` to keep `dbus` enabled OSes from falling asleep
+Inspired from `caffeinate` to keep system from falling asleep
 
-<!-- sudo apt install libdbus-1-dev pkg-config libclang-dev -->
+Supported: 
+- `windows`
+- `macos` (version >= 10.15)
+- `linux` (with `dbus`)
+
+
+## Why? 
+When you jump from distro to distro in linux and often hop between MacOS/Windows it becomes annoying to find a particular setting to toggle just to keep the system awake. I made `insomnia` to solve this problem. 
