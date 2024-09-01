@@ -5,8 +5,8 @@ pub fn inhibit_sleep() {
     let conn = connect_to_system_bus();
     let fd = call_inhibit_method(&conn);
 
-    println!("Sleep inhibited. Press Enter to release inhibition.");
-    crate::common::wait_for_user_input();
+    println!("Sleep inhibited. Press Enter to release inhibition...");
+    crate::wait_for_user_input();
 
     release_inhibition_unix(fd);
     println!("Inhibition released.");

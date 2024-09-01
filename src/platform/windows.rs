@@ -15,7 +15,7 @@ pub fn inhibit_sleep() {
 
     set_power_request(power_request);
 
-    println!("Sleep inhibited. Press Enter to release inhibition.");
+    println!("Sleep inhibited. Press Enter to release inhibition...");
     crate::common::wait_for_user_input();
 
     release_inhibition_windows(power_request);

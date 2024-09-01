@@ -2,31 +2,21 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdio.h>
 
-static IOPMAssertionID assertionID;
+static IOPMAssertionID assertionID = 0;
 
-void set_assertion() {
+bool set_assertion() {
     CFStringRef reasonForActivity = CFSTR("Preventing sleep for critical operation");
-
-    // Create the assertion to prevent system sleep
     IOReturn result = IOPMAssertionCreateWithName(
-        kIOPMAssertionTypeNoDisplaySleep,   // Assertion type
-        kIOPMAssertionLevelOn,              // Assertion level
-        reasonForActivity,                  // Reason for the assertion
-        &assertionID                        // Store the assertion ID
+        kIOPMAssertionTypeNoDisplaySleep,
+        kIOPMAssertionLevelOn,
+        reasonForActivity,
+        &assertionID
     );
-
-    if (result == kIOReturnSuccess) {
-        printf("System sleep is prevented successfully. Assertion ID: %u\n", assertionID);
-    } else {
-        printf("Failed to create system sleep assertion.\n");
-    }
+    return result == kIOReturnSuccess;
 }
 
 void release_assertion() {
-    IOReturn result = IOPMAssertionRelease(assertionID);
-    if (result == kIOReturnSuccess) {
-        printf("System sleep assertion released successfully.\n");
-    } else {
+    if (IOPMAssertionRelease(assertionID) != kIOReturnSuccess) {
         printf("Failed to release system sleep assertion.\n");
     }
 }

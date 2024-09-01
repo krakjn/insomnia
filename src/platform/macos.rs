@@ -1,16 +1,19 @@
 extern "C" {
-    fn set_assertion();
-    fn release_assertion();
+    fn set_assertion() -> bool;
+    fn release_assertion() -> bool;
 }
 
 pub fn inhibit_sleep() {
+    let insomnia: bool;
     unsafe {
-        set_assertion();
+        insomnia = set_assertion();
     }
-    println!("Sleep inhibited. Press Enter to release inhibition.");
-    crate::common::wait_for_user_input();
-    unsafe {
-        release_assertion();
+    if insomnia {
+        println!("Sleep inhibited. Press Enter to release inhibition...");
+        crate::wait_for_user_input();
+        unsafe {
+            release_assertion();
+        }
+        println!("Inhibition released.");
     }
-    println!("Inhibition released.");
 }
