@@ -13,3 +13,17 @@ libc = "0.2.158"
 
 [build-dependencies]
 cc = "1.1.15"
+
+[profile.release]
+opt-level = "z"           # Optimize for size without sacrificing too much performance
+lto = "thin"              # Enable ThinLTO, which is faster and reduces binary size
+codegen-units = 1         # Compile all code in a single codegen unit for better optimizations
+panic = "abort"           # Reduce binary size by aborting on panic instead of unwinding
+debug = 0                 # No debug symbols in the release binary
+rpath = false             # Do not set the runtime library search path
+incremental = false       # Disable incremental compilation for a clean release build
+overflow-checks = false   # Disable integer overflow checks (enabled by default in debug)
+strip = "debuginfo"       # Strip debuginfo, keeping symbols if needed for debugging
+
+[profile.release.package."*"]
+opt-level = "z"           # Apply size optimizations globally
