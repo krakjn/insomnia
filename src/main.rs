@@ -1,6 +1,4 @@
 mod platform;
-#[cfg(target_os = "macos")]
-mod bindings;
 
 fn main() {
     platform::inhibit_sleep();

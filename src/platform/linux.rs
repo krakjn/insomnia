@@ -32,7 +32,11 @@ fn call_inhibit_method(conn: &Connection) -> RawFd {
     let mode = "block"; // Mode can be 'block' or 'delay'
 
     let (fd,): (OwnedFd,) = proxy
-        .method_call("org.freedesktop.login1.Manager", "Inhibit", (what, who, why, mode))
+        .method_call(
+            "org.freedesktop.login1.Manager",
+            "Inhibit",
+            (what, who, why, mode),
+        )
         .expect("Failed to call Inhibit");
 
     fd.into_fd()

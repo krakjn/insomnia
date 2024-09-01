@@ -1,8 +1,10 @@
 use std::ptr::null_mut;
 use winapi::um::handleapi::CloseHandle;
+use winapi::um::powerbase::{
+    PowerRequestDisplayRequired, PowerRequestSystemRequired, PowerSetRequest,
+};
 use winapi::um::winbase::PowerCreateRequest;
-use winapi::um::winnt::{REASON_CONTEXT, POWER_REQUEST_CONTEXT_VERSION};
-use winapi::um::powerbase::{PowerSetRequest, PowerRequestSystemRequired, PowerRequestDisplayRequired};
+use winapi::um::winnt::{POWER_REQUEST_CONTEXT_VERSION, REASON_CONTEXT};
 
 pub fn inhibit_sleep() {
     let power_request = create_power_request();

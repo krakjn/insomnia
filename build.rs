@@ -1,20 +1,14 @@
 fn main() {
     #[cfg(target_os = "macos")]
     {
-    println!("cargo:rustc-link-lib=framework=IOKit");
-    println!("cargo:rustc-link-lib=framework=CoreFoundation");
+        cc::Build::new()
+            .file("src/platform/macos.c")
+            .compile("insomnia-macos");
+        // These lines ensure the linker knows about the necessary macOS frameworks
+        println!("cargo:rustc-link-lib=framework=IOKit");
+        println!("cargo:rustc-link-lib=framework=CoreFoundation");
 
-    let bindings = bindgen::Builder::default()
-        .header("wrapper.h")
-        .clang_arg("-F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks")
-        // Blocklist the problematic enum or identifier
-        .blocklist_type(".*unnamed_at_.*")  // Regex to match the problematic item
-        .blocklist_type(".*anonymous_at_.*")  // Regex to match the problematic item
-        .generate()
-        .expect("Unable to generate bindings");
-
-    bindings
-        .write_to_file("src/bindings.rs")
-        .expect("Couldn't write bindings!");
+        // Optional: Specify the minimum macOS version if necessary
+        println!("cargo:rustc-link-arg=-mmacosx-version-min=10.15");
     }
 }
