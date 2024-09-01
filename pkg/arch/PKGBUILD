@@ -1,0 +1,17 @@
+pkgname=insomnia
+pkgver=1.0
+pkgrel=1
+arch=('x86_64')
+pkgdesc="Insomnia is sleep inhibitor."
+url="https://github.com/krakjn/insomnia"
+license=('MIT')
+source=()
+
+package() {
+  install -Dm755 "target/release/insomnia" "${pkgdir}/usr/local/bin/insomnia"
+}
+
+post_remove() {
+  rm -f "/usr/local/bin/insomnia"
+}
+

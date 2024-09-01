@@ -1,0 +1,7 @@
+Package: insomnia
+Version: 0.2.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Tony Bright <krakjn@gmail.com>
+Description: Insomnia is a cross-platform sleep inhibitor.
