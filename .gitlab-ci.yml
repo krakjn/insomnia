@@ -6,11 +6,10 @@ build_job:
   stage: build
   image: $CI_REGISTRY/ballast-dev/insomnia:latest
   script:
-    - go build insomnia.go
-    - chmod +x insomnia
+    - cargo build --release
   artifacts:
     paths:
-      - insomnia
+      - target/release/insomnia
     expire_in: 1 week
   only:
     - main
