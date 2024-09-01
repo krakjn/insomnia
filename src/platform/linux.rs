@@ -17,7 +17,6 @@ fn connect_to_system_bus() -> Connection {
 }
 
 fn call_inhibit_method(conn: &Connection) -> RawFd {
-    // use dbus::blocking::Proxy;
     use dbus::arg::OwnedFd;
 
     let proxy = conn.with_proxy(

@@ -21,19 +21,17 @@ pub fn inhibit_sleep() {
         PowerCreateRequest(&reason_context)
     }.expect("unable to call PowerCreateRequest");
 
-    // Set the power request to keep the system awake
     unsafe {
-        PowerSetRequest(handle, PowerRequestSystemRequired);
-        PowerSetRequest(handle, PowerRequestDisplayRequired);
+        let _ = PowerSetRequest(handle, PowerRequestSystemRequired);
+        let _ = PowerSetRequest(handle, PowerRequestDisplayRequired);
     }
 
     println!("Sleep inhibited. Press Enter to release inhibition...");
     crate::wait_for_user_input();
 
-    // Clear the power request when done
     unsafe {
-        PowerClearRequest(handle, PowerRequestSystemRequired);
-        PowerClearRequest(handle, PowerRequestDisplayRequired);
+        let _ = PowerClearRequest(handle, PowerRequestSystemRequired);
+        let _ = PowerClearRequest(handle, PowerRequestDisplayRequired);
     }
     println!("Inhibition released.");
 }
