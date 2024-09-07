@@ -5,6 +5,36 @@ mkShell {
     pkg-config
     rustup
     #musl
+archlinux-keyring
+autoconf
+automake
+binutils
+bison
+debugedit
+fakeroot
+file
+findutils
+flex
+gawk
+gcc
+gettext
+git
+gnumake
+grep
+groff
+gzip
+libtool
+m4
+pacman
+patch
+perl
+pkg-config
+pkgconf
+python3
+sed
+sudo
+texinfo
+which
   ];
   PKG_CONFIG_PATH = "${dbus}/lib/pkgconfig";
 

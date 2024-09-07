@@ -1,5 +1,5 @@
 pkgname=insomnia
-pkgver=1.0
+pkgver=0.1.0
 pkgrel=1
 arch=('x86_64')
 pkgdesc="Insomnia is sleep inhibitor."
